@@ -7,10 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Importar estilos de Bootstrap
 const Inicio = () => {
   const [recetas, setRecetas] = useState([]);
 
+  const API = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchRecetas = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8080/api/recetas');
+        const { data } = await axios.get(`${API}/api/recetas`);
         setRecetas(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('¡Hubo un error al obtener las recetas!', error);
@@ -23,7 +25,7 @@ const Inicio = () => {
 
   const eliminarReceta = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/recetas/${id}`);
+      await await axios.delete(`${API}/api/recetas/${id}`);
       setRecetas(recetas.filter(receta => receta._id !== id));
     } catch (error) {
       console.error('¡Hubo un error al eliminar la receta!', error);

@@ -18,6 +18,8 @@ const validationSchema = Yup.object({
 const FormularioReceta = () => {
   const navigate = useNavigate();
 
+  const API = import.meta.env.VITE_API_URL;
+
   const formik = useFormik({
     initialValues: {
       nombre: "",
@@ -28,7 +30,7 @@ const FormularioReceta = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.post("http://localhost:8080/api/recetas", values);
+        await axios.post(`${API}/api/recetas`, values);
         navigate("/");
       } catch (error) {
         console.error("¡Hubo un error al agregar la nueva receta!", error);
